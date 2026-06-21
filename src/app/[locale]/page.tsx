@@ -10,7 +10,15 @@ import StatsCounter from '@/components/StatsCounter';
 import CtaBand from '@/components/CtaBand';
 import CaseStudyCard from '@/components/CaseStudyCard';
 import Reveal from '@/components/Reveal';
-import {caseStudies} from '@/data/caseStudies';
+import {
+  getHomepage,
+  getServices,
+  getStats,
+  getProcessSteps,
+  getFeaturedCaseStudies,
+  getSiteSettings
+} from '@/sanity/content';
+import {pick, type Localized} from '@/data/types';
 
 export default async function HomePage({
   params
@@ -20,11 +28,32 @@ export default async function HomePage({
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-  const featured = caseStudies.filter((c) => c.featured);
+
+  const [home, services, stats, steps, featured, settings] = await Promise.all([
+    getHomepage(),
+    getServices(),
+    getStats(),
+    getProcessSteps(),
+    getFeaturedCaseStudies(),
+    getSiteSettings()
+  ]);
+
+  const h = (home ?? {}) as Record<string, Localized | undefined>;
+  const get = (k: string) => (h[k] ? pick(h[k] as Localized, locale) : '');
+  const rotating = ((home?.heroRotating as Localized[] | undefined) ?? []).map(
+    (r) => pick(r, locale)
+  );
 
   return (
     <>
-      <Hero />
+      <Hero
+        eyebrow={get('heroEyebrow')}
+        rotating={rotating}
+        subtitle={get('heroSubtitle')}
+        primaryCta={get('heroPrimaryCta')}
+        secondaryCta={get('heroSecondaryCta')}
+        scroll={t('hero.scroll')}
+      />
       <LogoMarquee />
 
       {/* Services preview */}
@@ -32,9 +61,9 @@ export default async function HomePage({
         <div className="mx-auto max-w-8xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
-              eyebrow={t('services.eyebrow')}
-              title={t('services.title')}
-              intro={t('services.intro')}
+              eyebrow={get('servicesEyebrow')}
+              title={get('servicesTitle')}
+              intro={get('servicesIntro')}
             />
             <Reveal delay={0.1}>
               <Link
@@ -46,21 +75,27 @@ export default async function HomePage({
             </Reveal>
           </div>
           <div className="mt-14">
-            <ServicesGrid />
+            <ServicesGrid services={services} />
           </div>
         </div>
       </section>
 
-      <Showreel />
+      <Showreel
+        eyebrow={get('showreelEyebrow')}
+        title={get('showreelTitle')}
+        play={t('showreel.play')}
+        duration={t('showreel.duration')}
+        posterUrl={settings?.showreelPosterUrl}
+      />
 
       {/* Featured work */}
       <section className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-8xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
-              eyebrow={t('work.eyebrow')}
-              title={t('work.title')}
-              intro={t('work.intro')}
+              eyebrow={get('workEyebrow')}
+              title={get('workTitle')}
+              intro={get('workIntro')}
             />
             <Reveal delay={0.1}>
               <Link
@@ -85,12 +120,12 @@ export default async function HomePage({
       <section className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-8xl">
           <SectionHeading
-            eyebrow={t('process.eyebrow')}
-            title={t('process.title')}
-            intro={t('process.intro')}
+            eyebrow={get('processEyebrow')}
+            title={get('processTitle')}
+            intro={get('processIntro')}
           />
           <div className="mt-14">
-            <ProcessTimeline />
+            <ProcessTimeline steps={steps} />
           </div>
         </div>
       </section>
@@ -98,12 +133,9 @@ export default async function HomePage({
       {/* Stats */}
       <section className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-8xl">
-          <SectionHeading
-            eyebrow={t('stats.eyebrow')}
-            title={t('stats.title')}
-          />
+          <SectionHeading eyebrow={get('statsEyebrow')} title={get('statsTitle')} />
           <div className="mt-14">
-            <StatsCounter />
+            <StatsCounter stats={stats} />
           </div>
         </div>
       </section>

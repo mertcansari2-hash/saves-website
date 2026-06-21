@@ -3,16 +3,34 @@
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
 
-export default function ContactForm() {
+export default function ContactForm({formspreeId}: {formspreeId?: string}) {
   const t = useTranslations('contact.form');
   const budgetOptions = t.raw('budgetOptions') as string[];
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>(
+    'idle'
+  );
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('sending');
-    // No backend yet — simulate a submission.
-    setTimeout(() => setStatus('done'), 900);
+    const form = e.currentTarget;
+
+    if (!formspreeId) {
+      // Form ID henüz girilmemiş — simülasyon
+      setTimeout(() => setStatus('done'), 800);
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {Accept: 'application/json'},
+        body: new FormData(form)
+      });
+      setStatus(res.ok ? 'done' : 'error');
+    } catch {
+      setStatus('error');
+    }
   }
 
   const fieldClass =
@@ -83,6 +101,10 @@ export default function ContactForm() {
           className={`mt-2 resize-none ${fieldClass}`}
         />
       </label>
+
+      {status === 'error' && (
+        <p className="text-sm text-red-400">{t('required')}</p>
+      )}
 
       <button
         type="submit"

@@ -2,13 +2,18 @@ import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import {setRequestLocale, getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {caseStudies, getCaseStudy} from '@/data/caseStudies';
+import {
+  getCaseStudy,
+  getCaseStudies,
+  getCaseStudySlugs
+} from '@/sanity/content';
 import {pick} from '@/data/types';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
 
-export function generateStaticParams() {
-  return caseStudies.map((c) => ({slug: c.slug}));
+export async function generateStaticParams() {
+  const slugs = await getCaseStudySlugs();
+  return slugs.map((slug) => ({slug}));
 }
 
 export async function generateMetadata({
@@ -17,11 +22,11 @@ export async function generateMetadata({
   params: Promise<{locale: string; slug: string}>;
 }): Promise<Metadata> {
   const {locale, slug} = await params;
-  const study = getCaseStudy(slug);
+  const study = await getCaseStudy(slug);
   if (!study) return {};
   return {
     title: study.client,
-    description: pick(study.summary, locale)
+    description: study.summary ? pick(study.summary, locale) : undefined
   };
 }
 
@@ -33,12 +38,12 @@ export default async function CaseStudyPage({
   const {locale, slug} = await params;
   setRequestLocale(locale);
 
-  const study = getCaseStudy(slug);
+  const [study, all] = await Promise.all([getCaseStudy(slug), getCaseStudies()]);
   if (!study) notFound();
 
   const t = await getTranslations('work');
-  const index = caseStudies.findIndex((c) => c.slug === slug);
-  const next = caseStudies[(index + 1) % caseStudies.length];
+  const index = all.findIndex((c) => c.slug === slug);
+  const next = all[(index + 1) % all.length] ?? study;
 
   return (
     <>
@@ -65,18 +70,31 @@ export default async function CaseStudyPage({
           <h1 className="display mt-6 text-[clamp(3rem,10vw,9rem)]">
             {study.client}
           </h1>
-          <p className="mt-4 max-w-2xl text-xl text-mist">
-            {pick(study.tagline, locale)}
-          </p>
+          {study.tagline && (
+            <p className="mt-4 max-w-2xl text-xl text-mist">
+              {pick(study.tagline, locale)}
+            </p>
+          )}
 
-          {/* Hero media placeholder */}
+          {/* Hero media */}
           <div className="relative mt-12 aspect-[16/8] w-full overflow-hidden rounded-2xl border border-line">
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `radial-gradient(120% 120% at 30% 20%, ${study.accent}, #0c0c0c 70%)`
-              }}
-            />
+            {study.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={study.imageUrl}
+                alt={study.client}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(120% 120% at 30% 20%, ${
+                    study.accent || '#1a1a1a'
+                  }, #0c0c0c 70%)`
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
           </div>
 
@@ -103,9 +121,11 @@ export default async function CaseStudyPage({
 
             <div className="border-t border-line pt-8">
               <span className="eyebrow">{t('detail.overview')}</span>
-              <p className="mt-4 text-2xl leading-relaxed sm:text-3xl">
-                {pick(study.summary, locale)}
-              </p>
+              {study.summary && (
+                <p className="mt-4 text-2xl leading-relaxed sm:text-3xl">
+                  {pick(study.summary, locale)}
+                </p>
+              )}
             </div>
           </div>
 
@@ -113,32 +133,38 @@ export default async function CaseStudyPage({
           <div className="mt-16 grid gap-12 border-t border-line pt-12 sm:grid-cols-2">
             <Reveal>
               <h2 className="eyebrow">{t('detail.challenge')}</h2>
-              <p className="mt-4 leading-relaxed text-paper/85">
-                {pick(study.challenge, locale)}
-              </p>
+              {study.challenge && (
+                <p className="mt-4 leading-relaxed text-paper/85">
+                  {pick(study.challenge, locale)}
+                </p>
+              )}
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="eyebrow">{t('detail.solution')}</h2>
-              <p className="mt-4 leading-relaxed text-paper/85">
-                {pick(study.solution, locale)}
-              </p>
+              {study.solution && (
+                <p className="mt-4 leading-relaxed text-paper/85">
+                  {pick(study.solution, locale)}
+                </p>
+              )}
             </Reveal>
           </div>
 
           {/* Results */}
-          <div className="mt-16">
-            <span className="eyebrow">{t('detail.results')}</span>
-            <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
-              {study.metrics.map((m) => (
-                <div key={m.label.en} className="bg-graphite p-8">
-                  <div className="font-display text-5xl tracking-tight text-accent">
-                    {m.value}
+          {study.metrics && study.metrics.length > 0 && (
+            <div className="mt-16">
+              <span className="eyebrow">{t('detail.results')}</span>
+              <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+                {study.metrics.map((m, i) => (
+                  <div key={i} className="bg-graphite p-8">
+                    <div className="font-display text-5xl tracking-tight text-accent">
+                      {m.value}
+                    </div>
+                    <p className="mt-3 text-sm text-mist">{pick(m.label, locale)}</p>
                   </div>
-                  <p className="mt-3 text-sm text-mist">{pick(m.label, locale)}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Next project */}
           <Link

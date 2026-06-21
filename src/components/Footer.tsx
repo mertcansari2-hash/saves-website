@@ -1,8 +1,8 @@
-import {useTranslations} from 'next-intl';
+import {getLocale, getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {services} from '@/data/services';
-import {useLocale} from 'next-intl';
+import {getServices, getSiteSettings} from '@/sanity/content';
 import {pick} from '@/data/types';
+import SocialLinks from './SocialLinks';
 
 const navLinks = [
   {href: '/work', key: 'work'},
@@ -11,9 +11,13 @@ const navLinks = [
   {href: '/contact', key: 'contact'}
 ] as const;
 
-export default function Footer() {
-  const t = useTranslations();
-  const locale = useLocale();
+export default async function Footer() {
+  const t = await getTranslations();
+  const locale = await getLocale();
+  const [settings, services] = await Promise.all([
+    getSiteSettings(),
+    getServices()
+  ]);
   const year = new Date().getFullYear();
 
   return (
@@ -30,6 +34,7 @@ export default function Footer() {
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist">
               {t('footer.tagline')}
             </p>
+            <SocialLinks settings={settings} className="mt-6" />
           </div>
 
           <div>
@@ -52,7 +57,7 @@ export default function Footer() {
             <h3 className="eyebrow mb-5">{t('footer.servicesHeading')}</h3>
             <ul className="space-y-3 text-sm">
               {services.map((s) => (
-                <li key={s.id} className="text-mist">
+                <li key={s._id} className="text-mist">
                   {pick(s.title, locale)}
                 </li>
               ))}
@@ -62,16 +67,18 @@ export default function Footer() {
           <div>
             <h3 className="eyebrow mb-5">{t('footer.contactHeading')}</h3>
             <ul className="space-y-3 text-sm text-mist">
-              <li>
-                <a
-                  href={`mailto:${t('contact.email')}`}
-                  className="transition-colors hover:text-paper"
-                >
-                  {t('contact.email')}
-                </a>
-              </li>
-              <li>{t('contact.phone')}</li>
-              <li>{t('contact.address')}</li>
+              {settings?.email && (
+                <li>
+                  <a
+                    href={`mailto:${settings.email}`}
+                    className="transition-colors hover:text-paper"
+                  >
+                    {settings.email}
+                  </a>
+                </li>
+              )}
+              {settings?.phone && <li>{settings.phone}</li>}
+              {settings?.address && <li>{pick(settings.address, locale)}</li>}
             </ul>
           </div>
         </div>

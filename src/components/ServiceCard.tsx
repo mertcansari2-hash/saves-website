@@ -1,10 +1,10 @@
 import {useLocale, useTranslations} from 'next-intl';
 import {pick} from '@/data/types';
-import type {Service} from '@/data/services';
+import type {CmsService} from '@/sanity/content';
 import Reveal from './Reveal';
 
 interface Props {
-  service: Service;
+  service: CmsService;
   index: number;
   showCapabilities?: boolean;
 }
@@ -22,11 +22,13 @@ export default function ServiceCard({service, index, showCapabilities}: Props) {
         <span className="font-display text-sm text-accent">{service.number}</span>
         <h3 className="display text-2xl sm:text-3xl">{pick(service.title, locale)}</h3>
       </div>
-      <p className="mt-4 max-w-xl text-mist leading-relaxed">
-        {pick(service.description, locale)}
-      </p>
+      {service.description && (
+        <p className="mt-4 max-w-xl text-mist leading-relaxed">
+          {pick(service.description, locale)}
+        </p>
+      )}
 
-      {showCapabilities && (
+      {showCapabilities && service.capabilities && service.capabilities.length > 0 && (
         <div className="mt-7">
           <span className="eyebrow text-mist/70">{t('page.capabilities')}</span>
           <ul className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">

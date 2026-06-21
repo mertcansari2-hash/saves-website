@@ -2,21 +2,36 @@
 
 import {AnimatePresence, motion} from 'framer-motion';
 import {useEffect, useState} from 'react';
-import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 
-export default function Hero() {
-  const t = useTranslations('hero');
-  const rotating = t.raw('rotating') as string[];
+interface HeroProps {
+  eyebrow: string;
+  rotating: string[];
+  subtitle: string;
+  primaryCta: string;
+  secondaryCta: string;
+  scroll: string;
+}
+
+export default function Hero({
+  eyebrow,
+  rotating,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  scroll
+}: HeroProps) {
+  const words = rotating.length ? rotating : [''];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (words.length < 2) return;
     const id = setInterval(
-      () => setIndex((i) => (i + 1) % rotating.length),
+      () => setIndex((i) => (i + 1) % words.length),
       3200
     );
     return () => clearInterval(id);
-  }, [rotating.length]);
+  }, [words.length]);
 
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pb-20 pt-32 sm:px-8 lg:px-12">
@@ -34,7 +49,7 @@ export default function Hero() {
           transition={{duration: 0.6, ease: [0.16, 1, 0.3, 1]}}
           className="eyebrow"
         >
-          {t('eyebrow')}
+          {eyebrow}
         </motion.span>
 
         <h1 className="display mt-6 text-[clamp(2.75rem,9vw,8rem)]">
@@ -48,7 +63,7 @@ export default function Hero() {
                 transition={{duration: 0.6, ease: [0.16, 1, 0.3, 1]}}
                 className="block bg-gradient-to-r from-paper via-paper to-accent bg-clip-text text-transparent"
               >
-                {rotating[index]}
+                {words[index]}
               </motion.span>
             </AnimatePresence>
           </span>
@@ -60,7 +75,7 @@ export default function Hero() {
           transition={{duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1]}}
           className="mt-8 max-w-xl text-lg leading-relaxed text-mist"
         >
-          {t('subtitle')}
+          {subtitle}
         </motion.p>
 
         <motion.div
@@ -73,13 +88,13 @@ export default function Hero() {
             href="/contact"
             className="rounded-full bg-paper px-7 py-3 text-sm font-medium text-ink transition-colors hover:bg-accent"
           >
-            {t('primaryCta')}
+            {primaryCta}
           </Link>
           <Link
             href="/work"
             className="rounded-full border border-line px-7 py-3 text-sm font-medium text-paper transition-colors hover:border-paper"
           >
-            {t('secondaryCta')}
+            {secondaryCta}
           </Link>
         </motion.div>
       </div>
@@ -87,7 +102,7 @@ export default function Hero() {
       <div className="mx-auto mt-16 w-full max-w-8xl">
         <span className="eyebrow flex items-center gap-3">
           <span className="inline-block h-px w-10 bg-mist" />
-          {t('scroll')}
+          {scroll}
         </span>
       </div>
     </section>

@@ -4,6 +4,7 @@ import SectionHeading from '@/components/SectionHeading';
 import ServicesGrid from '@/components/ServicesGrid';
 import ProcessTimeline from '@/components/ProcessTimeline';
 import CtaBand from '@/components/CtaBand';
+import {getServices, getProcessSteps} from '@/sanity/content';
 
 export async function generateMetadata({
   params
@@ -23,6 +24,10 @@ export default async function ServicesPage({
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+  const [services, steps] = await Promise.all([
+    getServices(),
+    getProcessSteps()
+  ]);
 
   return (
     <>
@@ -38,7 +43,7 @@ export default async function ServicesPage({
 
       <section className="px-5 pb-20 sm:px-8 lg:px-12 lg:pb-28">
         <div className="mx-auto max-w-8xl">
-          <ServicesGrid showCapabilities />
+          <ServicesGrid services={services} showCapabilities />
         </div>
       </section>
 
@@ -50,7 +55,7 @@ export default async function ServicesPage({
             intro={t('process.intro')}
           />
           <div className="mt-14">
-            <ProcessTimeline />
+            <ProcessTimeline steps={steps} />
           </div>
         </div>
       </section>

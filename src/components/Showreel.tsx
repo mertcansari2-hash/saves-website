@@ -1,19 +1,31 @@
 'use client';
 
-import {useTranslations} from 'next-intl';
 import {useState} from 'react';
 import {motion} from 'framer-motion';
 
-export default function Showreel() {
-  const t = useTranslations('showreel');
+interface ShowreelProps {
+  eyebrow: string;
+  title: string;
+  play: string;
+  duration: string;
+  posterUrl?: string;
+}
+
+export default function Showreel({
+  eyebrow,
+  title,
+  play,
+  duration,
+  posterUrl
+}: ShowreelProps) {
   const [playing, setPlaying] = useState(false);
 
   return (
     <section className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
       <div className="mx-auto max-w-8xl">
         <div className="mb-8 flex items-end justify-between">
-          <span className="eyebrow">{t('eyebrow')}</span>
-          <span className="font-display text-sm text-mist">{t('duration')}</span>
+          <span className="eyebrow">{eyebrow}</span>
+          <span className="font-display text-sm text-mist">{duration}</span>
         </div>
 
         <motion.div
@@ -23,15 +35,24 @@ export default function Showreel() {
           transition={{duration: 0.8, ease: [0.16, 1, 0.3, 1]}}
           className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-line"
         >
-          {/* Placeholder media surface — replace with real <video> later */}
-          <div className="media-placeholder absolute inset-0 transition-transform duration-700 group-hover:scale-105" />
+          {/* Kapak: panelden görsel yüklenirse onu, yoksa gradient placeholder */}
+          {posterUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={posterUrl}
+              alt={title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <div className="media-placeholder absolute inset-0 transition-transform duration-700 group-hover:scale-105" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
 
           <button
             type="button"
             onClick={() => setPlaying((v) => !v)}
             className="absolute inset-0 flex flex-col items-center justify-center gap-5"
-            aria-label={t('play')}
+            aria-label={play}
           >
             <span className="flex h-20 w-20 items-center justify-center rounded-full border border-paper/30 bg-ink/40 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-accent">
               {playing ? (
@@ -47,7 +68,7 @@ export default function Showreel() {
 
           <div className="absolute bottom-0 left-0 p-6 sm:p-10">
             <p className="display max-w-lg text-2xl sm:text-3xl lg:text-4xl">
-              {t('title')}
+              {title}
             </p>
           </div>
         </motion.div>

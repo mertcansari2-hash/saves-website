@@ -3,8 +3,8 @@
 import {useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {useTranslations} from 'next-intl';
-import {caseStudies} from '@/data/caseStudies';
 import type {Category} from '@/data/types';
+import type {CmsCaseStudy} from '@/sanity/content';
 import CaseStudyCard from './CaseStudyCard';
 
 const categories: (Category | 'all')[] = [
@@ -15,14 +15,14 @@ const categories: (Category | 'all')[] = [
   'strategy'
 ];
 
-export default function WorkGrid() {
+export default function WorkGrid({studies}: {studies: CmsCaseStudy[]}) {
   const t = useTranslations('work');
   const [active, setActive] = useState<Category | 'all'>('all');
 
   const filtered =
     active === 'all'
-      ? caseStudies
-      : caseStudies.filter((c) => c.categories.includes(active));
+      ? studies
+      : studies.filter((c) => c.categories.includes(active));
 
   return (
     <div>
@@ -43,10 +43,7 @@ export default function WorkGrid() {
         ))}
       </div>
 
-      <motion.div
-        layout
-        className="grid gap-x-6 gap-y-12 sm:grid-cols-2"
-      >
+      <motion.div layout className="grid gap-x-6 gap-y-12 sm:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {filtered.map((study) => (
             <motion.div

@@ -6,6 +6,8 @@ import {Space_Grotesk, Inter} from 'next/font/google';
 import {routing} from '@/i18n/routing';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import {getSiteSettings} from '@/sanity/content';
 import '../globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -55,6 +57,7 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+  const settings = await getSiteSettings();
 
   return (
     <html lang={locale} className={`${spaceGrotesk.variable} ${inter.variable}`}>
@@ -63,6 +66,7 @@ export default async function LocaleLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <WhatsAppButton number={settings?.whatsapp} />
         </NextIntlClientProvider>
       </body>
     </html>

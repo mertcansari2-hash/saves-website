@@ -3,6 +3,7 @@ import {setRequestLocale, getTranslations} from 'next-intl/server';
 import SectionHeading from '@/components/SectionHeading';
 import WorkGrid from '@/components/WorkGrid';
 import CtaBand from '@/components/CtaBand';
+import {getCaseStudies} from '@/sanity/content';
 
 export async function generateMetadata({
   params
@@ -22,6 +23,7 @@ export default async function WorkPage({
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+  const studies = await getCaseStudies();
 
   return (
     <>
@@ -37,7 +39,7 @@ export default async function WorkPage({
 
       <section className="px-5 pb-20 sm:px-8 lg:px-12 lg:pb-28">
         <div className="mx-auto max-w-8xl">
-          <WorkGrid />
+          <WorkGrid studies={studies} />
         </div>
       </section>
 

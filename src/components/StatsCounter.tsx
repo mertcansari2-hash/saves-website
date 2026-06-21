@@ -3,19 +3,17 @@
 import {useEffect, useRef, useState} from 'react';
 import {useInView} from 'framer-motion';
 import {useLocale} from 'next-intl';
-import {stats} from '@/data/stats';
 import {pick} from '@/data/types';
+import type {CmsStat} from '@/sanity/content';
 
 function Stat({
   value,
   suffix,
-  prefix,
   label,
   active
 }: {
   value: number;
   suffix: string;
-  prefix?: string;
   label: string;
   active: boolean;
 }) {
@@ -40,7 +38,6 @@ function Stat({
   return (
     <div className="border-t border-line pt-6">
       <div className="font-display text-5xl tracking-tight sm:text-6xl">
-        {prefix}
         {isFloat ? display.toFixed(1) : Math.round(display)}
         <span className="text-accent">{suffix}</span>
       </div>
@@ -49,7 +46,7 @@ function Stat({
   );
 }
 
-export default function StatsCounter() {
+export default function StatsCounter({stats}: {stats: CmsStat[]}) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, {once: true, margin: '-100px'});
   const locale = useLocale();
@@ -61,11 +58,10 @@ export default function StatsCounter() {
     >
       {stats.map((s) => (
         <Stat
-          key={s.label.en}
+          key={s._id}
           value={s.value}
-          suffix={s.suffix}
-          prefix={s.prefix}
-          label={pick(s.label, locale)}
+          suffix={s.suffix || ''}
+          label={s.label ? pick(s.label, locale) : ''}
           active={inView}
         />
       ))}
