@@ -32,7 +32,14 @@ const client = createClient({
 });
 
 const L = (t: string, e: string) => ({tr: t, en: e});
-const zip = (a: string[], b: string[]) => a.map((t, i) => L(t, b[i] ?? t));
+// Array öğelerine benzersiz _key ekler (Sanity zorunlu kılar)
+const keyed = <T extends object>(arr: T[], p: string) =>
+  arr.map((o, i) => ({...o, _key: `${p}${i}`}));
+const zip = (a: string[], b: string[], p: string) =>
+  keyed(
+    a.map((t, i) => L(t, b[i] ?? t)),
+    p
+  );
 
 async function run() {
   const docs: Record<string, unknown>[] = [];
@@ -53,7 +60,7 @@ async function run() {
     _id: 'homepage',
     _type: 'homepage',
     heroEyebrow: L(tr.hero.eyebrow, en.hero.eyebrow),
-    heroRotating: zip(tr.hero.rotating, en.hero.rotating),
+    heroRotating: zip(tr.hero.rotating, en.hero.rotating, 'r'),
     heroSubtitle: L(tr.hero.subtitle, en.hero.subtitle),
     heroPrimaryCta: L(tr.hero.primaryCta, en.hero.primaryCta),
     heroSecondaryCta: L(tr.hero.secondaryCta, en.hero.secondaryCta),
@@ -83,7 +90,7 @@ async function run() {
     eyebrow: L(tr.about.eyebrow, en.about.eyebrow),
     title: L(tr.about.title, en.about.title),
     lead: L(tr.about.lead, en.about.lead),
-    paragraphs: zip(tr.about.paragraphs, en.about.paragraphs),
+    paragraphs: zip(tr.about.paragraphs, en.about.paragraphs, 'p'),
     valuesEyebrow: L(tr.about.valuesEyebrow, en.about.valuesEyebrow),
     valuesTitle: L(tr.about.valuesTitle, en.about.valuesTitle),
     values: tr.about.values.map((v: {title: string; description: string}, i: number) => ({
@@ -134,7 +141,7 @@ async function run() {
       order: i,
       title: s.title,
       description: s.description,
-      capabilities: s.capabilities
+      capabilities: keyed(s.capabilities, 'c')
     });
   });
 
