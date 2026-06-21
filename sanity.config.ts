@@ -5,7 +5,12 @@ import {structureTool} from 'sanity/structure';
 import {visionTool} from '@sanity/vision';
 import {schemaTypes} from './src/sanity/schemaTypes';
 import {structure} from './src/sanity/structure';
-import {apiVersion, dataset, projectId} from './src/sanity/env';
+
+// Studio için public değerler (tarayıcı paketine gömülür; gizli değil).
+// Site tarafı (src/sanity/client.ts) NEXT_PUBLIC_* env'leri kullanır.
+const projectId = 'n65dhiqo';
+const dataset = 'production';
+const apiVersion = '2024-01-01';
 
 export default defineConfig({
   name: 'default',
