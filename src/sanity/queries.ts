@@ -33,6 +33,16 @@ const caseStudyFields = groq`
   "imageUrl": image.asset->url
 `;
 
+// --- Blog ---
+export const postsByLangQuery = groq`*[_type == "post" && language == $locale && defined(publishedAt) && defined(slug.current)] | order(publishedAt desc){
+  _id, title, "slug": slug.current, excerpt, "coverUrl": coverImage.asset->url, publishedAt, author
+}`;
+export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+  _id, title, "slug": slug.current, language, excerpt, "coverUrl": coverImage.asset->url, publishedAt, author,
+  body[]{..., _type == "image" => {"url": asset->url}}
+}`;
+export const postSlugsQuery = groq`*[_type == "post" && defined(slug.current)].slug.current`;
+
 export const caseStudiesQuery = groq`*[_type == "caseStudy"] | order(order asc){${caseStudyFields}}`;
 export const featuredCaseStudiesQuery = groq`*[_type == "caseStudy" && featured == true] | order(order asc){${caseStudyFields}}`;
 export const caseStudyBySlugQuery = groq`*[_type == "caseStudy" && slug.current == $slug][0]{${caseStudyFields}}`;

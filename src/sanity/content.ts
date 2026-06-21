@@ -89,3 +89,28 @@ export const getCaseStudy = (slug: string) =>
 
 export const getCaseStudySlugs = () =>
   client.fetch<string[]>(q.caseStudySlugsQuery, {}, opts);
+
+// --- Blog ---
+export interface CmsPostListItem {
+  _id: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  coverUrl?: string;
+  publishedAt: string;
+  author?: string;
+}
+
+export interface CmsPost extends CmsPostListItem {
+  language: string;
+  body?: unknown[];
+}
+
+export const getPosts = (locale: string) =>
+  client.fetch<CmsPostListItem[]>(q.postsByLangQuery, {locale}, opts);
+
+export const getPost = (slug: string) =>
+  client.fetch<CmsPost | null>(q.postBySlugQuery, {slug}, opts);
+
+export const getPostSlugs = () =>
+  client.fetch<string[]>(q.postSlugsQuery, {}, opts);

@@ -7,6 +7,7 @@ import SocialLinks from './SocialLinks';
 const navLinks = [
   {href: '/work', key: 'work'},
   {href: '/services', key: 'services'},
+  {href: '/blog', key: 'blog'},
   {href: '/about', key: 'about'},
   {href: '/contact', key: 'contact'}
 ] as const;

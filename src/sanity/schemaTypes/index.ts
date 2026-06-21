@@ -5,6 +5,7 @@ import {caseStudy} from './documents/caseStudy';
 import {service} from './documents/service';
 import {stat, processStep} from './documents/stat';
 import {homepage, aboutPage, contactPage} from './documents/pages';
+import {post} from './documents/post';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // objects
@@ -19,5 +20,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   caseStudy,
   service,
   stat,
-  processStep
+  processStep,
+  post
 ];

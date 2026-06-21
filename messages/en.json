@@ -7,6 +7,7 @@
     "home": "Home",
     "work": "Work",
     "services": "Services",
+    "blog": "Blog",
     "about": "About",
     "contact": "Contact",
     "cta": "Let's Talk",
@@ -78,6 +79,16 @@
       "next": "Next Project",
       "back": "All Work",
       "overview": "Overview"
+    }
+  },
+  "blog": {
+    "readMore": "Read more",
+    "backToBlog": "All posts",
+    "empty": "Our first post will be here soon.",
+    "page": {
+      "eyebrow": "Blog",
+      "title": "Insights & updates",
+      "intro": "Ideas and news from our agency on digital marketing, performance, video and AI."
     }
   },
   "clients": {

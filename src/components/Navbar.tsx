@@ -9,6 +9,7 @@ const links = [
   {href: '/', key: 'home'},
   {href: '/work', key: 'work'},
   {href: '/services', key: 'services'},
+  {href: '/blog', key: 'blog'},
   {href: '/about', key: 'about'},
   {href: '/contact', key: 'contact'}
 ] as const;

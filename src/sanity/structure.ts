@@ -19,6 +19,7 @@ export const structure: StructureResolver = (S) =>
           .child(S.document().schemaType(s.id).documentId(s.id))
       ),
       S.divider(),
+      S.documentTypeListItem('post').title('Blog Yazıları'),
       S.documentTypeListItem('caseStudy').title('Vaka Çalışmaları'),
       S.documentTypeListItem('service').title('Hizmetler'),
       S.documentTypeListItem('stat').title('İstatistikler'),
