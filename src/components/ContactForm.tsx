@@ -10,19 +10,26 @@ export default function ContactForm({formspreeId}: {formspreeId?: string}) {
     'idle'
   );
 
+  // Hem tam URL'yi hem de sadece ID'yi kabul et
+  const formId = (formspreeId || '')
+    .trim()
+    .replace(/\/+$/, '')
+    .split('/')
+    .pop();
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('sending');
     const form = e.currentTarget;
 
-    if (!formspreeId) {
+    if (!formId) {
       // Form ID henüz girilmemiş — simülasyon
       setTimeout(() => setStatus('done'), 800);
       return;
     }
 
     try {
-      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
         headers: {Accept: 'application/json'},
         body: new FormData(form)
