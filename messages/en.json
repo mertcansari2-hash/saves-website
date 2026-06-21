@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "title": "Saves Dijital — 360° Digital Advertising Agency",
+    "description": "Data-driven performance marketing, AI-powered video production and 360° digital growth. Over a decade of experience for global and national brands."
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Let's Talk",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "eyebrow": "360° Digital Advertising Agency",
+    "rotating": ["Data-Driven Performance", "360° Digital Growth", "Creative AI Solutions"],
+    "subtitle": "With over a decade of experience, we create measurable growth for brands through performance marketing, video production and AI-powered content.",
+    "primaryCta": "Start a Project",
+    "secondaryCta": "See Our Work",
+    "scroll": "Explore"
+  },
+  "showreel": {
+    "eyebrow": "Showreel 2025",
+    "title": "The work that grows brands, in one film.",
+    "play": "Play Showreel",
+    "duration": "01:48"
+  },
+  "services": {
+    "eyebrow": "What We Do",
+    "title": "360° capability under one roof",
+    "intro": "We unite strategy, creative and media to manage your brand's entire digital journey end to end.",
+    "viewAll": "All Services",
+    "learnMore": "Details",
+    "page": {
+      "eyebrow": "Services",
+      "title": "Four muscles that engineer growth",
+      "intro": "From digital media marketing to video production, AI content to web software — we deliver 360° brand management.",
+      "capabilities": "Scope"
+    }
+  },
+  "process": {
+    "eyebrow": "How We Work",
+    "title": "What happens after we win you, transparently",
+    "intro": "From acquisition to reporting, we run every step in a measurable, open and accountable way."
+  },
+  "stats": {
+    "eyebrow": "By the Numbers",
+    "title": "Results speak"
+  },
+  "work": {
+    "eyebrow": "Selected Work",
+    "title": "Success stories",
+    "intro": "A selection of the 360° campaigns we've run with global and national brands.",
+    "all": "All",
+    "viewProject": "View Project",
+    "viewAll": "All Work",
+    "empty": "No projects in this category yet.",
+    "categories": {
+      "performance": "Performance",
+      "video": "Video",
+      "ai": "AI",
+      "strategy": "Strategy"
+    },
+    "page": {
+      "eyebrow": "Work",
+      "title": "The work that grows brands",
+      "intro": "Selected work spanning fast-moving consumer goods to B2B, performance to creative production."
+    },
+    "detail": {
+      "client": "Client",
+      "year": "Year",
+      "services": "Services",
+      "challenge": "Challenge",
+      "solution": "Solution",
+      "results": "Results",
+      "next": "Next Project",
+      "back": "All Work",
+      "overview": "Overview"
+    }
+  },
+  "clients": {
+    "label": "Brands we've worked with"
+  },
+  "ctaBand": {
+    "eyebrow": "Ready?",
+    "title": "Let's build your next campaign together.",
+    "text": "We're ready to grow your brand with data and creativity. Let's meet.",
+    "button": "Get in Touch"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Over a decade of experience, one team",
+    "lead": "Saves Dijital is a 360° digital advertising agency that unites strategy, creativity and technology.",
+    "paragraphs": [
+      "From luxury brands to global chains, national institutions to B2B players, we are an experienced team running planning and execution in parallel across a wide spectrum.",
+      "By uniting performance marketing, video production, AI image/audio generation and digital strategy under one roof, we manage a brand's entire digital journey."
+    ],
+    "valuesEyebrow": "Our Values",
+    "valuesTitle": "The principles that guide us",
+    "values": [
+      {"title": "Data-Driven", "description": "We make every decision with measurable data and validate intuition with numbers."},
+      {"title": "Creative Courage", "description": "We aren't afraid of bold ideas that stick and convert."},
+      {"title": "Transparency", "description": "We always share the process, budget and results openly."},
+      {"title": "End-to-End Ownership", "description": "We own every stage of the work, from strategy to reporting."}
+    ],
+    "teamEyebrow": "Team",
+    "teamTitle": "Strategists, producers and technologists",
+    "teamIntro": "A cross-disciplinary team of marketers, creative directors, production and data specialists."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Got a project? Let's talk.",
+    "lead": "Fill in the form or reach us directly — we respond within 24 hours.",
+    "form": {
+      "name": "Full Name",
+      "namePh": "Your full name",
+      "email": "Email",
+      "emailPh": "you@company.com",
+      "company": "Company",
+      "companyPh": "Company name",
+      "budget": "Budget range",
+      "budgetOptions": ["Select", "$15K – $50K", "$50K – $150K", "$150K+", "Not sure yet"],
+      "message": "Message",
+      "messagePh": "Tell us briefly about your project...",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been received, we'll be in touch shortly.",
+      "required": "This field is required."
+    },
+    "infoEyebrow": "Reach us directly",
+    "emailLabel": "Email",
+    "email": "hello@savesdijital.com",
+    "phoneLabel": "Phone",
+    "phone": "+90 212 000 00 00",
+    "addressLabel": "Address",
+    "address": "Levent, Istanbul, Türkiye",
+    "socialLabel": "Social"
+  },
+  "footer": {
+    "tagline": "Data-driven performance, creative AI solutions and 360° digital growth.",
+    "navHeading": "Site",
+    "servicesHeading": "Services",
+    "contactHeading": "Contact",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top"
+  }
+}

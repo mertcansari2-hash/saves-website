@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "title": "Saves Dijital — 360° Dijital Reklam Ajansı",
+    "description": "Veri odaklı performans pazarlaması, AI destekli video prodüksiyon ve 360° dijital büyüme. 10 yılı aşkın deneyimle global ve ulusal markalar için."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "work": "İşler",
+    "services": "Hizmetler",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "cta": "Projeni Konuşalım",
+    "menu": "Menü",
+    "close": "Kapat"
+  },
+  "hero": {
+    "eyebrow": "360° Dijital Reklam Ajansı",
+    "rotating": ["Veri Odaklı Performans", "360° Dijital Büyüme", "Yaratıcı AI Çözümleri"],
+    "subtitle": "10 yılı aşkın deneyimle; performans pazarlaması, video prodüksiyon ve AI destekli içerikle markalar için ölçülebilir büyüme yaratıyoruz.",
+    "primaryCta": "Projeni Konuşalım",
+    "secondaryCta": "İşlerimizi Gör",
+    "scroll": "Keşfet"
+  },
+  "showreel": {
+    "eyebrow": "Showreel 2025",
+    "title": "Markaları büyüten işler, tek bir filmde.",
+    "play": "Showreel'i Oynat",
+    "duration": "01:48"
+  },
+  "services": {
+    "eyebrow": "Ne Yapıyoruz",
+    "title": "Tek çatı altında 360° yetkinlik",
+    "intro": "Strateji, kreatif ve medyayı birleştirerek markanızın tüm dijital yolculuğunu uçtan uca yönetiyoruz.",
+    "viewAll": "Tüm Hizmetler",
+    "learnMore": "Detaylar",
+    "page": {
+      "eyebrow": "Hizmetler",
+      "title": "Büyümeyi tasarlayan dört kas",
+      "intro": "Dijital medya pazarlamadan video prodüksiyona, AI içerik üretiminden web yazılımına kadar 360° marka yönetimi sunuyoruz.",
+      "capabilities": "Kapsam"
+    }
+  },
+  "process": {
+    "eyebrow": "Nasıl Çalışıyoruz",
+    "title": "Müşteri kazanımından sonrası, şeffaf bir süreç",
+    "intro": "Kazanımdan raporlamaya; her adımı ölçülebilir, açık ve hesap verebilir biçimde yürütüyoruz."
+  },
+  "stats": {
+    "eyebrow": "Rakamlarla",
+    "title": "Sonuçlar konuşur"
+  },
+  "work": {
+    "eyebrow": "Seçili İşler",
+    "title": "Başarı hikayeleri",
+    "intro": "Global ve ulusal markalarla yürüttüğümüz 360° kampanyalardan bir seçki.",
+    "all": "Tümü",
+    "viewProject": "Projeyi İncele",
+    "viewAll": "Tüm İşler",
+    "empty": "Bu kategoride henüz proje yok.",
+    "categories": {
+      "performance": "Performans",
+      "video": "Video",
+      "ai": "AI",
+      "strategy": "Strateji"
+    },
+    "page": {
+      "eyebrow": "İşler",
+      "title": "Markaları büyüten işler",
+      "intro": "Hızlı tüketimden B2B'ye, performanstan yaratıcı prodüksiyona uzanan seçili çalışmalarımız."
+    },
+    "detail": {
+      "client": "Marka",
+      "year": "Yıl",
+      "services": "Hizmetler",
+      "challenge": "Zorluk",
+      "solution": "Çözüm",
+      "results": "Sonuçlar",
+      "next": "Sonraki Proje",
+      "back": "Tüm İşler",
+      "overview": "Genel Bakış"
+    }
+  },
+  "clients": {
+    "label": "Birlikte çalıştığımız markalar"
+  },
+  "ctaBand": {
+    "eyebrow": "Hazır mısınız?",
+    "title": "Bir sonraki kampanyanızı birlikte kuralım.",
+    "text": "Markanızı veri ve yaratıcılıkla büyütmeye hazırız. Hadi tanışalım.",
+    "button": "İletişime Geç"
+  },
+  "about": {
+    "eyebrow": "Hakkımızda",
+    "title": "10 yılı aşkın deneyim, tek bir takım",
+    "lead": "Saves Dijital; strateji, yaratıcılık ve teknolojiyi birleştiren 360° bir dijital reklam ajansıdır.",
+    "paragraphs": [
+      "Lüks markalardan global zincirlere, ulusal kurumlardan B2B oyunculara kadar geniş bir yelpazede; planlama ve uygulamayı eşzamanlı yürüten deneyimli bir ekibiz.",
+      "Performans pazarlaması, video prodüksiyon, AI görsel/ses üretimi ve dijital strateji yetkinliklerimizi tek çatı altında birleştirerek markaların tüm dijital yolculuğunu yönetiyoruz."
+    ],
+    "valuesEyebrow": "Değerlerimiz",
+    "valuesTitle": "Bizi yönlendiren ilkeler",
+    "values": [
+      {"title": "Veri Odaklılık", "description": "Her kararı ölçülebilir verilerle alır, sezgiyi rakamlarla doğrularız."},
+      {"title": "Yaratıcı Cesaret", "description": "Akılda kalan, dönüşüm getiren fikirlerden korkmayız."},
+      {"title": "Şeffaflık", "description": "Süreci, bütçeyi ve sonuçları her zaman açık paylaşırız."},
+      {"title": "Uçtan Uca Sahiplenme", "description": "Stratejiden raporlamaya kadar işin her aşamasını sahipleniriz."}
+    ],
+    "teamEyebrow": "Ekip",
+    "teamTitle": "Stratejistler, yapımcılar ve teknologlar",
+    "teamIntro": "Pazarlamacılar, yaratıcı yönetmenler, prodüksiyon ve veri uzmanlarından oluşan disiplinler arası bir takım."
+  },
+  "contact": {
+    "eyebrow": "İletişim",
+    "title": "Bir proje mi var? Konuşalım.",
+    "lead": "Formu doldurun ya da doğrudan bize ulaşın; 24 saat içinde dönüş yapıyoruz.",
+    "form": {
+      "name": "Ad Soyad",
+      "namePh": "Adınız ve soyadınız",
+      "email": "E-posta",
+      "emailPh": "ornek@sirket.com",
+      "company": "Şirket",
+      "companyPh": "Şirket adı",
+      "budget": "Bütçe aralığı",
+      "budgetOptions": ["Seçiniz", "₺50K – ₺150K", "₺150K – ₺500K", "₺500K+", "Henüz net değil"],
+      "message": "Mesaj",
+      "messagePh": "Projenizden kısaca bahsedin...",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor...",
+      "success": "Teşekkürler! Mesajınız alındı, kısa süre içinde dönüş yapacağız.",
+      "required": "Bu alan zorunludur."
+    },
+    "infoEyebrow": "Doğrudan ulaşın",
+    "emailLabel": "E-posta",
+    "email": "merhaba@savesdijital.com",
+    "phoneLabel": "Telefon",
+    "phone": "+90 212 000 00 00",
+    "addressLabel": "Adres",
+    "address": "Levent, İstanbul, Türkiye",
+    "socialLabel": "Sosyal"
+  },
+  "footer": {
+    "tagline": "Veri odaklı performans, yaratıcı AI çözümleri ve 360° dijital büyüme.",
+    "navHeading": "Site",
+    "servicesHeading": "Hizmetler",
+    "contactHeading": "İletişim",
+    "rights": "Tüm hakları saklıdır.",
+    "backToTop": "Yukarı çık"
+  }
+}

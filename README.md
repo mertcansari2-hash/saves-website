@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Saves Dijital — Web Sitesi
 
-## Getting Started
+360° dijital reklam ajansı için premium, çift dilli (TR/EN) tanıtım ve portföy sitesi.
 
-First, run the development server:
+## Teknoloji
+
+- **Next.js 16** (App Router, TypeScript)
+- **Tailwind CSS v4** (tema `src/app/globals.css` içinde `@theme` ile)
+- **next-intl** (TR/EN, `[locale]` routing — varsayılan: `tr`)
+- **Framer Motion** (sinematik animasyonlar)
+
+## Çalıştırma
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # geliştirme → http://localhost:3000 (otomatik /tr'ye yönlenir)
+npm run build    # üretim derlemesi
+npm run start    # üretim sunucusu
+npm run lint     # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Yapı
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/[locale]/        # tüm sayfalar (home, work, work/[slug], services, about, contact)
+  components/          # Hero, Showreel, WorkGrid, ServicesGrid, ProcessTimeline, ...
+  data/                # caseStudies.ts, services.ts, stats.ts, process.ts (çift dilli {tr,en})
+  i18n/                # routing, navigation, request (next-intl)
+  proxy.ts             # locale yönlendirme (Next 16 "proxy" = eski "middleware")
+messages/              # tr.json, en.json (tüm arayüz metinleri)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## İçeriği düzenleme
 
-## Learn More
+- **Metinler / çeviriler:** `messages/tr.json` ve `messages/en.json`
+- **Vaka çalışmaları (Starbucks, Domino's, Kom, Noksel):** `src/data/caseStudies.ts`
+- **Hizmetler / istatistikler / süreç:** `src/data/*.ts`
+- **Renkler & tipografi:** `src/app/globals.css` → `@theme` bloğu (ink, paper, accent, fontlar)
 
-To learn more about Next.js, take a look at the following resources:
+## Yer tutucu medya → gerçek medya
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Şu an showreel, vaka görselleri, müşteri logoları ve ekip fotoğrafları CSS gradient
+yer tutucularıdır (`.media-placeholder` ve inline gradient'ler):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Showreel:** `src/components/Showreel.tsx` içindeki `.media-placeholder` div'ini bir
+  `<video>` (veya poster + play) ile değiştirin. Dosyaları `public/` altına koyun.
+- **Vaka görselleri:** `src/components/CaseStudyCard.tsx` ve `work/[slug]/page.tsx`
+  içindeki gradient `background`'ı `next/image` ile değiştirin; `caseStudies.ts`'e
+  `image` alanı ekleyebilirsiniz.
+- **Logolar:** `src/components/LogoMarquee.tsx` — metin yerine SVG logolar koyun.
 
-## Deploy on Vercel
+## Notlar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- İletişim formu şimdilik **client-side**'dır (gerçek gönderim yok). Backend/e-posta
+  entegrasyonu için `src/components/ContactForm.tsx` içindeki `handleSubmit`'i bağlayın.
